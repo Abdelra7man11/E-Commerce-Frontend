@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -11,7 +11,16 @@ export class Products {
   constructor(private _http:HttpClient) {}
 
 getAllProducts(){
-  return this._http.get(`${environment.apiUrl}/api/products`)
+  return this._http.get(`${environment.apiUrl}products`)
 }
+
+getAllCategories(){
+  return this._http.get(`${environment.apiUrl}products/categories`)
+}
+
+getProductByCategory(keyword:string){
+  return this._http.get(`${environment.apiUrl}products/category/${keyword}`)
+}
+
 
 }

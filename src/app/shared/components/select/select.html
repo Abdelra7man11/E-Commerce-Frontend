@@ -1,0 +1,7 @@
+ <label for="" class="my-1">{{title}} :</label>
+    <select class="form-control" (change)="detectChange($event)">
+      <option value="all" selected>All</option>
+      @for (option of data; track option) {
+        <option [value]="option">{{ option }}</option>
+      }
+    </select>
