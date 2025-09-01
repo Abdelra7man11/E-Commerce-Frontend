@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-product-item',
@@ -9,6 +9,11 @@ import { Component, Input } from '@angular/core';
 export class ProductItem {
 
   @Input() data:any={}
+  @Output() item = new EventEmitter()
+
+  Add(){
+    this.item.emit(this.data)
+  }
 
 
 

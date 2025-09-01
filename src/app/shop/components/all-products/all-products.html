@@ -1,17 +1,13 @@
 <div class="box mt-5">
   <div class="my-2 w-25">
-    <app-select
-      [data]="categories"
-      [title]="'Categories'"
-      (SelectValue)="filterCategory($event)"
-    ></app-select>
+    <app-select [data]="categories" [title]="'Categories'" (SelectValue)="filterCategory($event)"></app-select>
   </div>
 
   @if (!loading) {
   <div class="row">
     @for (item of products; track item.id) {
     <div class="col-md-3 col-sm-12">
-      <app-product-item [data]="item"></app-product-item>
+      <app-product-item [data]="item" (item)="addToCart($event)"></app-product-item>
     </div>
     }
   </div>
