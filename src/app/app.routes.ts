@@ -8,7 +8,7 @@ import { Carts } from './carts/carts';
 export const routes: Routes = [
   { path: '', component:Home },
   { path:"products",component:AllProducts},
-  { path:"products/:id",component:ProductDetails},
+  { path:"products/details/:id",component:ProductDetails},
   { path:"cart",component:Carts},
   { path: '**', component:Notfound}];
 

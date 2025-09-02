@@ -18,9 +18,13 @@ getAllCategories(){
   return this._http.get(`${environment.apiUrl}products/categories`)
 }
 
-getProductByCategory(keyword:string){
+getProductsByCategory(keyword:string){
   return this._http.get(`${environment.apiUrl}products/category/${keyword}`)
 }
 
+
+getProductById(id:any){
+  return this._http.get(`${environment.apiUrl}products/${id}`)
+}
 
 }
