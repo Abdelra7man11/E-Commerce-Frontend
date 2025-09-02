@@ -8,7 +8,6 @@ import { ProductItem } from '../product-item/product-item';
 
 @Component({
   selector: 'app-all-products',
-  standalone: true, // مهم جدًا للـ lazy loading
   imports: [CommonModule, Spinner, Select, ProductItem],
   templateUrl: './all-products.html',
   styleUrls: ['./all-products.scss'],
@@ -18,7 +17,7 @@ export class AllProducts implements OnInit {
   allProducts: any[] = [];
   categories: any[] = [];
   cartProducts: any[] = [];
-  isLoading = false; //
+  loadingCount = 0; // Variable Loading
 
   constructor(private _service: Products) {}
 
@@ -26,46 +25,58 @@ export class AllProducts implements OnInit {
     this.getProducts();
     this.getCategories();
   }
-getProducts() {
-    this.isLoading = true; // ✅ نبدأ اللودينج
+
+ //  Loading
+  private startLoading() {
+    this.loadingCount++;
+  }
+  private stopLoading() {
+    this.loadingCount = Math.max(0, this.loadingCount - 1);
+  }
+  get isLoading(): boolean {
+    return this.loadingCount > 0;
+  }
+
+  getProducts() {
+    this.startLoading();
     this._service.getAllProducts().subscribe({
       next: (data: any) => {
         this.products = data;
         this.allProducts = data;
-        this.isLoading = false; // ✅ نوقف اللودينج بعد النجاح
+        this.stopLoading();
       },
       error: (err) => {
         alert(err);
-        this.isLoading = false; // ✅ نوقف اللودينج لو حصل خطأ
+        this.stopLoading();
       },
     });
   }
 
   getCategories() {
-    this.isLoading = true;
+    this.startLoading();
     this._service.getAllCategories().subscribe({
       next: (data: any) => {
         this.categories = data;
-        this.isLoading = false;
+        this.stopLoading();
       },
       error: (err) => {
         alert(err);
-        this.isLoading = false;
+        this.stopLoading();
       },
     });
   }
 
   filterCategory(event: any) {
     const value = event.target.value;
-    this.isLoading = true; // ✅ نبدأ اللودينج
+    this.startLoading();
 
     setTimeout(() => {
       this.products = value === 'all'
         ? this.allProducts
         : this.allProducts.filter(p => p.category === value);
 
-      this.isLoading = false; // ✅ نوقف اللودينج بعد الفلترة
-    }, 200);
+      this.stopLoading();
+    }, 200); // delay صغير للـ spinner
   }
 
   addToCart(event: any) {

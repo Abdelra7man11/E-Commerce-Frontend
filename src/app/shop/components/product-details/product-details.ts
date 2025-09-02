@@ -13,7 +13,7 @@ import { Spinner } from "../../../shared/components/spinner/spinner";
 export class ProductDetails implements OnInit {
   id: any;
   data: any = {};
-  isLoading = false; // ✅ متغير اللودينج
+  isLoading = false; // Variable Loading
   constructor(private route: ActivatedRoute, private _service: Products) {}
 
   ngOnInit(): void {
@@ -21,15 +21,15 @@ export class ProductDetails implements OnInit {
     this.getProduct();
   }
 getProduct() {
-    this.isLoading = true; // ✅ نبدأ اللودينج
+    this.isLoading = true; // Start Loading
     this._service.getProductById(this.id).subscribe({
       next: (res) => {
         this.data = res;
-        this.isLoading = false; // ✅ نوقف اللودينج بعد النجاح
+        this.isLoading = false; // Stop Loading
       },
       error: (err) => {
         console.error(err);
-        this.isLoading = false; // ✅ نوقف اللودينج لو حصل خطأ
+        this.isLoading = false;  // Stop Loading in Error
       }
     });
   }
