@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, ActivatedRoute } from '@angular/router';
-import { Products } from '../../services/products';
-import { Spinner } from "../../../shared/components/spinner/spinner";
+import { Products } from '../../services/products.service';
+import { Spinner } from '../../../shared/components/spinner/spinner';
 
 @Component({
   selector: 'app-product-details',
@@ -20,7 +20,7 @@ export class ProductDetails implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getProduct();
   }
-getProduct() {
+  getProduct() {
     this.isLoading = true; // Start Loading
     this._service.getProductById(this.id).subscribe({
       next: (res) => {
@@ -29,8 +29,8 @@ getProduct() {
       },
       error: (err) => {
         console.error(err);
-        this.isLoading = false;  // Stop Loading in Error
-      }
+        this.isLoading = false; // Stop Loading in Error
+      },
     });
   }
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Products } from '../../services/products';
+import { Products } from '../../services/products.service';
 import { Spinner } from '../../../shared/components/spinner/spinner';
 import { Select } from '../../../shared/components/select/select';
 import { ProductItem } from '../product-item/product-item';
-
+import { IProduct } from '../../models/product';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-all-products',
@@ -13,9 +14,9 @@ import { ProductItem } from '../product-item/product-item';
   styleUrls: ['./all-products.scss'],
 })
 export class AllProducts implements OnInit {
-  products: any[] = [];
+  products: IProduct[] = [];
   allProducts: any[] = [];
-  categories: any[] = [];
+  categories: Category[] = [];
   cartProducts: any[] = [];
   loadingCount = 0; // Variable Loading
 
@@ -26,7 +27,7 @@ export class AllProducts implements OnInit {
     this.getCategories();
   }
 
- //  Loading
+  //  Loading
   private startLoading() {
     this.loadingCount++;
   }
@@ -66,23 +67,26 @@ export class AllProducts implements OnInit {
     });
   }
 
-  filterCategory(event: any) {
-    const value = event.target.value;
+  filterCategory(value: any) {
+    // const value = event.target.value;
     this.startLoading();
 
     setTimeout(() => {
-      this.products = value === 'all'
-        ? this.allProducts
-        : this.allProducts.filter(p => p.category === value);
+      this.products =
+        value === 'all'
+          ? this.allProducts
+          : this.allProducts.filter((p) => p.category === value);
 
       this.stopLoading();
-    }, 200); // delay صغير للـ spinner
+    }, 200);
   }
 
   addToCart(event: any) {
     if ('cart' in localStorage) {
       this.cartProducts = JSON.parse(localStorage.getItem('cart')!);
-      let exist = this.cartProducts.find(item => item.item.id == event.item.id);
+      let exist = this.cartProducts.find(
+        (item) => item.item.id == event.item.id
+      );
       if (exist) {
         alert('Product is already in your cart');
       } else {

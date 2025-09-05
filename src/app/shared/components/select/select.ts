@@ -1,24 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-select',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './select.html',
-  styleUrl: './select.scss'
+  styleUrl: './select.scss',
 })
-export class Select implements OnInit{
+export class Select implements OnInit {
+  @Input() title: string = '';
+  @Input() data: any[] = [];
+  @Output() SelectValue = new EventEmitter();
 
-@Input() title:string=""
-@Input() data:any[]=[]
-@Output() SelectValue = new EventEmitter()
+  selected: string = 'all';
 
-ngOnInit(): void {}
+  ngOnInit(): void {}
 
-
-  detectChange(event:any){
-    this.SelectValue.emit(event)
+  detectChange(event: any) {
+    const value = event.target.value;
+    this.SelectValue.emit(value);
   }
-
-
-
 }

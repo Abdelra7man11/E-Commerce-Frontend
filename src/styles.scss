@@ -1,8 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
-body{
-  padding: 0;
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+
+* {
   margin: 0;
-}
-*{
+  padding: 0;
+  box-sizing: border-box;
   font-family: cursive;
 }
+
+body {
+  background-color: #f8f9fa;
+}
+
+
+// @media (max-width: 992px) {
+//   ul {
+//     width: 30%;
+//   }
+// }
+
+// @media (max-width: 768px) {
+//   body {
+//     padding-top: 70px;
+//   }
+
+//   .content {
+//     flex-direction: column;
+//     text-align: center;
+//     gap: 15px;
+//   }
+
+//   ul {
+//     width: 100%;
+//     justify-content: center;
+//     gap: 20px;
+//   }
+
+//   .categories-list {
+//     justify-content: center;
+//   }
+// }
+
+// @media (max-width: 576px) {
+//   .categories-list {
+//     flex-direction: column;
+//     align-items: center;
+//   }
+
+//   .category-item {
+//     width: 80%;
+//     justify-content: center;
+//   }
+// }

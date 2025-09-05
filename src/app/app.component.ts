@@ -3,10 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { Header } from "./shared/components/header/header";
 import { Home } from './home/home';
 import { Notfound } from './shared/components/notfound/notfound';
-import { AllProducts } from './shop/components/all-products/all-products';
-import { ProductDetails } from './shop/components/product-details/product-details';
-import { HttpClientModule } from '@angular/common/http';
-
+import { AllProducts } from './Products/components/all-products/all-products';
+import { ProductDetails } from './Products/components/product-details/product-details';
 
 
 @Component({
