@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
+import { IProduct } from '../models/product';
+import { ICategory } from '../models/category';
 
 @Injectable({
   providedIn: 'root',
@@ -8,15 +11,17 @@ import { environment } from '../../environments/environment';
 export class Products {
   constructor(private _http: HttpClient) {}
 
-  getAllProducts() {
-    return this._http.get(`${environment.apiUrl}products`);
+  getAllProducts(): Observable<IProduct[]> {
+    return this._http.get<IProduct[]>(`${environment.apiUrl}products`);
   }
   // getAllProducts() {
   //   return this._http.get(`https://fakestoreapi.in/api/products`);
   // }
 
-  getAllCategories() {
-    return this._http.get(`${environment.apiUrl}products/categories`);
+  getAllCategories(): Observable<ICategory[]> {
+    return this._http.get<ICategory[]>(
+      `${environment.apiUrl}products/categories`,
+    );
   }
 
   getProductsByCategory(keyword: string) {

@@ -5,7 +5,7 @@ import { Spinner } from '../../../shared/components/spinner/spinner';
 import { Select } from '../../../shared/components/select/select';
 import { ProductItem } from '../product-item/product-item';
 import { IProduct } from '../../models/product';
-import { Category } from '../../models/category';
+import { ICategory } from '../../models/category';
 
 @Component({
   selector: 'app-all-products',
@@ -16,7 +16,7 @@ import { Category } from '../../models/category';
 export class AllProducts implements OnInit {
   products: IProduct[] = [];
   allProducts: any[] = [];
-  categories: Category[] = [];
+  categories: ICategory[] = [];
   cartProducts: any[] = [];
   loadingCount = 0; // Variable Loading
 
@@ -85,7 +85,7 @@ export class AllProducts implements OnInit {
     if ('cart' in localStorage) {
       this.cartProducts = JSON.parse(localStorage.getItem('cart')!);
       let exist = this.cartProducts.find(
-        (item) => item.item.id == event.item.id
+        (item) => item.item.id == event.item.id,
       );
       if (exist) {
         alert('Product is already in your cart');

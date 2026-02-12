@@ -1,4 +1,4 @@
-import { Products } from './../../Products/services/products.service';
+import { Products } from '../../Products/services/products.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -26,7 +26,7 @@ export class getCart implements OnInit {
   constructor(
     private _service: CartService,
     private build: FormBuilder,
-    private _products: Products
+    private _products: Products,
   ) {}
 
   ngOnInit(): void {
