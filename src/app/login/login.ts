@@ -32,6 +32,7 @@ export class Login {
     this.showPassword = !this.showPassword;
   }
   submitLoginForm(form: FormGroup) {
+    localStorage.setItem('authToken', 'true');
     console.log(form);
   }
 }
