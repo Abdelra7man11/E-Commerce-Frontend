@@ -1,12 +1,15 @@
-<nav class="navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container">
-    <div class="content">
-      <h2 class="logo" routerLink="">Market</h2>
-      <ul>
-        <li routerLink="/products">Products</li>
-        <li routerLink="/cart">Cart</li>
-        <li routerLink="/cartAdmin">AdminCart</li>
-      </ul>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container d-flex justify-content-between align-items-center">
+    <!-- Logo -->
+    <h2 class="logo" routerLink="/">Market</h2>
+
+    <!-- Menu -->
+    <ul class="navbar-nav d-flex flex-row gap-3 m-0">
+      <li class="nav-item" routerLink="/products">Products</li>
+      <li class="nav-item" routerLink="/cart">Cart</li>
+      <li class="nav-item" routerLink="/cartAdmin">AdminCart</li>
+      <li class="nav-item" routerLink="/login">Login</li>
+      <li class="nav-item" routerLink="/register">Register</li>
+    </ul>
   </div>
 </nav>

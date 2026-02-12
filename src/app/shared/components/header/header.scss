@@ -1,16 +1,21 @@
+/* Navbar background & shadow */
 nav {
   background: linear-gradient(to right, #950b0b, #440606);
   color: #FFF;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Container content: flex layout */
 .content {
   display: flex;
   justify-content: space-between;
+  /* logo left, menu right */
   align-items: center;
-  padding: 15px 0;
+  padding: 15px 30px;
+  /* مساحة من الجوانب */
 }
 
+/* Logo style */
 .logo {
   cursor: pointer;
   font-size: 28px;
@@ -20,14 +25,18 @@ nav {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+/* Menu style */
 ul {
   list-style: none;
   display: flex;
-  justify-content: space-between;
-  width: 20%;
+  /* عرض عناصر في صف واحد */
+  gap: 20px;
+  /* مسافة بين العناصر */
   margin: 0;
+  padding: 0;
 }
 
+/* Menu items style */
 li {
   cursor: pointer;
   font-size: 18px;
@@ -38,6 +47,7 @@ li {
   border-radius: 5px;
 }
 
+/* Hover effect */
 li:hover {
   background-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
