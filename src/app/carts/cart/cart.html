@@ -1,10 +1,11 @@
 <div class="cartBox">
   <h1 class="text-danger">Shopping Cart</h1>
   <div class="headCart">
-    <p class="lead">You have <label class="text-danger">{{cartProducts.length}}</label> item in your cart</p>
+    <p class="lead">
+      You have <label class="text-danger">{{cartProducts.length}}</label> item in your cart
+    </p>
     <!-- Clear Shopping Cart -->
-    <span class="text-danger card-header" data-bs-toggle="modal" data-bs-target="#confirmClearCartModal"
-      (click)="confirmClearCart()">
+    <span class="text-danger card-header" (click)="confirmClearCart()">
       Clear Shopping Cart
     </span>
   </div>
@@ -21,45 +22,37 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let prd of cartProducts; let index = index">
-        <td><img [src]="prd.item.image" alt=""></td>
+      <tr *ngFor="let prd of cartProducts; let index = index" class="text-center">
+        <td><img [src]="prd.item.image" alt="" style="width: 50px;"></td>
         <td>{{prd.item.title}}</td>
         <td>{{prd.item.price}} L.E</td>
         <td>
-          <div class="quantity">
+          <div class="quantity d-flex align-items-center justify-content-center">
             <button class="btn btn-dark" (click)="plusAmount(index)">+</button>
-            <input class="form-control" type="number" min="1" (change)="detectChange()" [(ngModel)]="prd.quantity">
+            <input class="form-control mx-1" type="number" min="1" [(ngModel)]="prd.quantity" (change)="detectChange()"
+              style="width:60px;">
             <button class="btn btn-dark" (click)="minsAmount(index)">-</button>
           </div>
         </td>
         <td>{{prd.item.price * prd.quantity}} L.E</td>
         <td>
           <div class="action-buttons">
-            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
-              (click)="confirmDelete(index)">
-              Delete
-            </button>
-            <button class="btn btn-primary">
-              View
-            </button>
+            <button class="btn btn-danger" (click)="confirmDelete(index)">Delete</button>
+            <button class="btn btn-primary" (click)="viewProduct(index)">View</button>
+
           </div>
         </td>
-
       </tr>
     </tbody>
     <tfoot>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>Total :{{total}} L.E</th>
+      <tr class="text-center">
+        <th colspan="4"></th>
+        <th>Total: {{total}} L.E</th>
         <th><button class="btn btn-success" (click)="AddCart()">Order Now</button></th>
       </tr>
     </tfoot>
   </table>
 </div>
-
 
 <div class="alert alert-success" role="alert" *ngIf="success">
   <strong>Well done!</strong> Your Order is Successfully Sent
@@ -70,19 +63,19 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">confirm Delete</h5>
+        <h5 class="modal-title">Confirm Delete</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">Are you sure you want to delete the product?</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="deleteProduct()" data-bs-dismiss="modal">Delete</button>
+        <button type="button" class="btn btn-danger" (click)="deleteProduct()">Delete</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal Confirm emptying the basket -->
+<!-- Modal Confirm Emptying the Basket -->
 <div class="modal fade" id="confirmClearCartModal" tabindex="-1" aria-labelledby="confirmClearCartLabel"
   aria-hidden="true">
   <div class="modal-dialog">
@@ -94,7 +87,35 @@
       <div class="modal-body">Are you sure you want to empty the basket completely?</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="clearCart()" data-bs-dismiss="modal">Empty</button>
+        <button type="button" class="btn btn-danger" (click)="clearCart()">Empty</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product View Modal -->
+<div class="modal fade" id="viewProductModal" tabindex="-1" aria-labelledby="viewProductLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{selectedProduct?.item.title}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-4">
+            <img [src]="selectedProduct?.item.image" alt="" class="img-fluid">
+          </div>
+          <div class="col-md-8">
+            <p><strong>Price:</strong> {{selectedProduct?.item.price}} L.E</p>
+            <p><strong>Quantity:</strong> {{selectedProduct?.quantity}}</p>
+            <p><strong>Description:</strong> {{selectedProduct?.item.description}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
       </div>
     </div>
   </div>

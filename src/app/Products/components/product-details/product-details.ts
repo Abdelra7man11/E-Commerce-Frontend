@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { Products } from '../../services/products.service';
-import { Spinner } from '../../../shared/components/spinner/spinner';
+import { Spinner } from '../../../shared/components/loader/loader';
+import { LoaderService } from '../../../loader.service';
 
 @Component({
   selector: 'app-product-details',
@@ -13,23 +14,27 @@ import { Spinner } from '../../../shared/components/spinner/spinner';
 export class ProductDetails implements OnInit {
   id: any;
   data: any = {};
-  isLoading = false; // Variable Loading
-  constructor(private route: ActivatedRoute, private _service: Products) {}
+  constructor(
+    private route: ActivatedRoute,
+    private _service: Products,
+    private _loaderService: LoaderService,
+  ) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getProduct();
   }
   getProduct() {
-    this.isLoading = true; // Start Loading
+    this._loaderService.showLoader();
     this._service.getProductById(this.id).subscribe({
       next: (res) => {
         this.data = res;
-        this.isLoading = false; // Stop Loading
       },
       error: (err) => {
         console.error(err);
-        this.isLoading = false; // Stop Loading in Error
+      },
+      complete: () => {
+        this._loaderService.hideLoader(); // Stop Loading in Complete
       },
     });
   }

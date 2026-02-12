@@ -1,3 +1,13 @@
+<!-- Loading -->
+<div class="text-center w-100">
+  <app-spinner></app-spinner>
+</div>
+
+<!-- Toast message -->
+<div *ngIf="message" class="cart-message-toast">
+  {{ message }}
+</div>
+
 <!-- Select Component -->
 
 <div class="box mt-5">
@@ -7,16 +17,11 @@
 
   <!-- Product-item Component -->
 
-  <div class="row" *ngIf="!isLoading">
+  <div class="row">
     @for (item of products; track item.id) {
     <div class="col-md-3 col-sm-12">
       <app-product-item [data]="item" (item)="addToCart($event)"></app-product-item>
     </div>
     }
   </div>
-</div>
-
-<!-- Loading -->
-<div class="text-center w-100" *ngIf="isLoading">
-  <app-spinner></app-spinner>
 </div>

@@ -24,11 +24,11 @@ export class Products {
     );
   }
 
-  getProductsByCategory(keyword: string) {
+  getProductsByCategory(keyword: string): Observable<any> {
     return this._http.get(`${environment.apiUrl}products/category/${keyword}`);
   }
 
-  getProductById(id: any) {
+  getProductById(id: any): Observable<any> {
     return this._http.get(`${environment.apiUrl}products/${id}`);
   }
 }

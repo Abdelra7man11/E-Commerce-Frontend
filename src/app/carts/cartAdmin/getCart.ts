@@ -52,7 +52,7 @@ export class getCart implements OnInit {
   deleteCart(id: number) {
     this._service.deleteCart(id).subscribe((res: any) => {
       this.getAllCarts();
-      alert('Cart Deleted Success' + id);
+      console.log('Cart Deleted Success' + id);
     });
   }
 
